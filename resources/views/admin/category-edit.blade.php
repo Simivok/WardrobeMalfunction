@@ -3,7 +3,7 @@
 <div class="main-content-inner">
                             <div class="main-content-wrap">
                                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                                    <h3>Brand infomation</h3>
+                                    <h3>Category infomation</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                         <li>
                                             <a href="{{route('admin.index')}}">
@@ -14,44 +14,44 @@
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <a href="{{route('admin.brands')}}">
-                                                <div class="text-tiny">Brands</div>
+                                            <a href="{{route('admin.categories')}}">
+                                                <div class="text-tiny">Categories</div>
                                             </a>
                                         </li>
                                         <li>
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <div class="text-tiny">Edit Brand</div>
+                                            <div class="text-tiny">Edit Category</div>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- new-category -->
                                 <div class="wg-box">
-                                    <form class="form-new-product form-style-1" action="{{route('admin.brand.update')}}" method="POST"
+                                    <form class="form-new-product form-style-1" action="{{route('admin.category.update')}}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
-                                        <input type="hidden" name="id" value={{$brand->id}}/>
+                                        <input type="hidden" name="id" value={{$category->id}}/>
                                         <fieldset class="name">
-                                            <div class="body-title">Brand Name <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="text" placeholder="Brand name" name="name"
-                                                tabindex="0" value="{{$brand->name}}" aria-required="true" required="">
+                                            <div class="body-title">Category Name <span class="tf-color-1">*</span></div>
+                                            <input class="flex-grow" type="text" placeholder="Category name" name="name"
+                                                tabindex="0" value="{{$category->name}}" aria-required="true" required="">
                                         </fieldset>
                                         @error('name')<span class="alert alert-danger text-center">{{$massage}}</span> @enderror
                                         <fieldset class="name">
-                                            <div class="body-title">Brand Slug <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="text" placeholder="Brand Slug" name="slug"
-                                                tabindex="0" value="{{$brand->slug}}" aria-required="true" required="">
+                                            <div class="body-title">Category Slug <span class="tf-color-1">*</span></div>
+                                            <input class="flex-grow" type="text" placeholder="Category Slug" name="slug"
+                                                tabindex="0" value="{{$category->slug}}" aria-required="true" required="">
                                         </fieldset>
                                         @error('slug')<span class="alert alert-danger text-center">{{$massage}}</span> @enderror
                                         <fieldset>
                                             <div class="body-title">Upload images <span class="tf-color-1">*</span>
                                             </div>
                                             <div class="upload-image flex-grow">
-                                                @if($brand->image)
+                                                @if($category->image)
                                                 <div class="item" id="imgpreview" >
-                                                    <img src="{{asset('storage/'.$brand->image)}}" class="effect8" alt="">
+                                                    <img src="{{asset('storage/'.$category->image)}}" class="effect8" alt="">
                                                 </div>
                                                 @endif
                                                 <div id="upload-file" class="item up-load">

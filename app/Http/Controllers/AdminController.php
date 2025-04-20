@@ -53,7 +53,7 @@ class AdminController extends Controller
     public function brand_update(Request $request){
         $request->validate([
             'name'=> 'required',
-            'slug'=> 'required|unique:brands,slug'.$request->id,
+            'slug'=> 'required|unique:brands,slug,'.$request->id,
             'image'=> 'mimes:png,jpg,jpeg|max:2048'
         ]);
         $brand = Brand::find($request->id);
@@ -64,7 +64,7 @@ class AdminController extends Controller
                 File::delete(public_path('uploads/brands').'/'.$brand->image);
             }
             if ($request->file('image')) {
-                $filePath = $request->file('image')->store('image', 'public');
+                $filePath = $request->file('image')->store('brands', 'public');
             }
             $brand->image = $filePath;
            
@@ -108,5 +108,42 @@ class AdminController extends Controller
         $category->save();
         return redirect()->route('admin.categories')->with('status','Category has been added successfully!'); 
     }
+    public function category_edit($id){
+        $category = Category::find($id);
+        return view('admin.category-edit',compact('category'));
+    }
+    public function category_update(Request $request)
+    {
+        $request->validate([
+            'name'=> 'required',
+            'slug'=> 'required|unique:categories,slug,'.$request->id,
+            'image'=> 'mimes:png,jpg,jpeg|max:2048'
+        ]);
+        $category = Category::find($request->id);
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        if($request->hasFile('image')){
+            if(File::exists(public_path('uploads/categories').'/'.$category->image)){
+                File::delete(public_path('uploads/categories').'/'.$category->image);
+            }
+            if ($request->file('image')) {
+                $filePath = $request->file('image')->store('image', 'public');
+            }
+            $category->image = $filePath;
+           
+        };
+        
+        $category->save();
+        return redirect()->route('admin.categories')->with('status','Category has been updated successfully!');
+    }
+    public function category_delete($id){
+        $category = Category::find($id);
+        if (File::exists(public_path('uploads/categories').'/'.$category->image)) {
+            File::delete(public_path('uploads/categories').'/'.$category->image);
+        }
+        $category->delete();
+        return redirect()->route('admin.categories')->with('status','Category has been deleted successfully');
+    }
+    
     
 }
