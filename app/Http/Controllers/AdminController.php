@@ -38,7 +38,7 @@ class AdminController extends Controller
         $brand->name = $request->name;
         $brand->slug = Str::slug($request->name);
         if ($request->file('image')) {
-			$filePath = $request->file('image')->store('image', 'public');
+			$filePath = $request->file('image')->store('brands', 'public');
 		}
         $brand->image = $filePath;
         $brand->save();
