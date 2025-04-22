@@ -313,7 +313,7 @@
               <a href="{{route('home.index')}}" class="navigation__link">Home</a>
             </li>
             <li class="navigation__item">
-              <a href="shop.html" class="navigation__link">Shop</a>
+              <a href="{{route('shop.index')}}" class="navigation__link">Shop</a>
             </li>
             <li class="navigation__item">
               <a href="cart.html" class="navigation__link">Cart</a>
@@ -402,7 +402,7 @@
               <a href="{{route('home.index')}}" class="navigation__link">Home</a>
             </li>
             <li class="navigation__item">
-              <a href="shop.html" class="navigation__link">Shop</a>
+              <a href="{{route('shop.index')}}" class="navigation__link">Shop</a>
             </li>
             <li class="navigation__item">
               <a href="cart.html" class="navigation__link">Cart</a>
@@ -512,11 +512,11 @@
         <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
           <div class="logo">
             <a href="{{route('home.index')}}">
-              <img src="{{ asset('assets/images/logo.png') }}" alt="SurfsideMedia" class="logo__image d-block" />
+              <img src="{{ asset('assets/images/logo.png') }}" alt="WardrobeMalfunction" class="logo__image d-block" />
             </a>
           </div>
-          <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-          <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
+          <p class="footer-address">123 Beach Avenue, Wardrobe City, 00000</p>
+          <p class="m-0"><strong class="fw-medium">contact@wardrobemelfunction.com</strong></p>
           <p><strong class="fw-medium">+1 000-000-0000</strong></p>
 
           <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
@@ -614,7 +614,7 @@
 
     <div class="footer-bottom">
       <div class="container d-md-flex align-items-center">
-        <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+        <span class="footer-copyright me-auto">©2025 Wardrobe Malfunction</span>
         <div class="footer-settings d-md-flex align-items-center">
           <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
             Conditions</a>

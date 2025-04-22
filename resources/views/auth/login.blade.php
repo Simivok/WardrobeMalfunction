@@ -22,7 +22,7 @@
                 <label for="email">Email address *</label>
                 @error('email')
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{$massage}}</strong>
+                    <strong>{{$message}}</strong>
                 </span>
                 @enderror
               </div>
@@ -35,7 +35,7 @@
                 <label for="customerPasswodInput">Password *</label>
                 @error('password')
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{$massage}}</strong>
+                    <strong>{{$message}}</strong>
                 </span>
                 @enderror
               </div>

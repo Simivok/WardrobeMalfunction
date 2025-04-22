@@ -60,7 +60,7 @@
                             <select class="" name="category_id">
                                 <option>Choose category</option>
                                 @foreach ($categories as $category) 
-                                <option value="{{$category->id}}" {{$product->$category_id == $category->id ? "selected":""}}>{{$category->name}}</option>
+                                <option value="{{$category->id}}" {{$product->category_id == $category->id ? "selected":""}}>{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -73,7 +73,7 @@
                             <select class="" name="brand_id">
                                 <option>Choose Brand</option>
                                 @foreach ($brands as $brand) 
-                                <option value="{{$brand->id}}"{{$product->$brand_id == $brand->id ? "selected":""}}>{{$brand->name}}</option>
+                                <option value="{{$brand->id}}"{{$product->brand_id == $brand->id ? "selected":""}}>{{$brand->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="upload-image flex-grow">
                         <div class="item" id="imgpreview" >
-                            <img src="{{asset('storage/'.$products->image)}}"
+                            <img src="{{asset('storage/'.$category->image)}}"
                                 class="effect8" alt="{{$product->name}}">
                         </div>
                         <div id="upload-file" class="item up-load">
@@ -127,9 +127,13 @@
                 <fieldset>
                     <div class="body-title mb-10">Upload Gallery Images</div>
                     <div class="upload-image mb-16">
-                        <!-- <div class="item">
-        <img src="images/upload/upload-1.png" alt="">
-    </div>                                                 -->
+                    @if ($product->images)      
+                        @foreach (explode(',',$product->images) as $img)
+                         <div class="item gitems">
+                            <img src="{{asset('storage/'.trim($img))}}" alt="">
+                         </div> 
+                        @endforeach  
+                        @endif                                               
                         <div id="galUpload" class="item up-load">
                             <label class="uploadfile" for="gFile">
                                 <span class="icon">
@@ -188,8 +192,8 @@
                         <div class="body-title mb-10">Stock</div>
                         <div class="select mb-10">
                             <select class="" name="stock_status">
-                                <option value="instock" {{$product->$stock_status == "instock" ? "selected":""}}>InStock</option>
-                                <option value="outofstock"{{$product->$stock_status == "outofstock" ? "selected":""}}>Out of Stock</option>
+                                <option value="instock" {{$product->stock_status == "instock" ? "selected":""}}>InStock</option>
+                                <option value="outofstock"{{$product->stock_status == "outofstock" ? "selected":""}}>Out of Stock</option>
                             </select>
                         </div>
                     </fieldset>
@@ -198,8 +202,8 @@
                         <div class="body-title mb-10">Featured</div>
                         <div class="select mb-10">
                             <select class="" name="featured">
-                                <option value="0" {{$product->$featured == "0" ? "selected":""}}>No</option>
-                                <option value="1" {{$product->$featured == "1" ? "selected":""}}>Yes</option>
+                                <option value="0" {{$product->featured == "0" ? "selected":""}}>No</option>
+                                <option value="1" {{$product->featured == "1" ? "selected":""}}>Yes</option>
                             </select>
                         </div>
                     </fieldset>

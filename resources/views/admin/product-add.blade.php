@@ -224,9 +224,17 @@
                 if(file)
             {
                 $("#imgpreview img").attr('src',URL.createObjectURL(file));
-                $("#imgpreview img").show();
+                $("#imgpreview").show();
             }
             });
+            $("#gFile").on("change",function(e){
+                const photoInp = $("#gFile");
+                const gphotos = this.files;
+                $.each(gphotos,function(key,val){
+                    $("#galUpload").prepend(`<div class="item gitems"><img src"${URL.createObjectURL(val)}"/></div>`);
+                });
+            });
+
             $("#input[name='name']").on("change",function(){
                 $("#input[name='slug']").val(StringToSlug($(this).val()));
             });

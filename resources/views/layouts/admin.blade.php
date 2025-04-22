@@ -278,8 +278,8 @@
                                                         </div>
                                                         <div class="flex items-center justify-between gap20 flex-grow">
                                                             <div class="name">
-                                                                <a href="product-list.html" class="body-text">Kristin
-                                                                    Watson</a>
+                                                                <a href="product-list.html" class="body-text">ADMIN
+                                                                    USER</a>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -399,7 +399,7 @@
                                                     <img src="images/avatar/user-1.png" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Kristin Watson</span>
+                                                    <span class="body-title mb-2">ADMIN USER</span>
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>
@@ -460,7 +460,7 @@
 
 
                         <div class="bottom-page">
-                            <div class="body-text">Copyright © 2024 SurfsideMedia</div>
+                            <div class="body-text">Copyright © 2025 WardrobeMalfunction</div>
                         </div>
                     </div>
 

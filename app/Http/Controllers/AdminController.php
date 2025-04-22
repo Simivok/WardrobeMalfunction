@@ -195,10 +195,27 @@ class AdminController extends Controller
             $filePath = $request->file('image')->store('image', 'public');
             $product->image = $filePath;
         }
-       
-       
-        
+        $gallery_arr = array();
+        $gallery_images = "";
+        $counter = 1;
 
+       if ($request->hasFile('images')) 
+       {
+        $allowedfileExtion = ['jpg','png','jpeg'];
+        $files = $request->file('images');
+        foreach($files as $file){
+            $gextension = $file->getClientOriginalExtension();
+            $gcheck = in_array($gextension,$allowedfileExtion);
+            if ($gcheck) 
+            {
+                $gfileName = $current_timestamp . "-" . $counter . "." . $gextension;
+                array_push($gallery_arr,$gfileName);
+                $counter = $counter + 1;
+            }
+        }
+        $gallery_images = implode(',' ,$gallery_arr);
+       }
+       $product->images = $gallery_images;
         $product->save();
         return redirect()->route('admin.products')->with('status','Product has been added successfully');
     }
@@ -216,7 +233,7 @@ public function product_update(Request $request)
     $request->validate([
         
         'name' => 'required',
-        'slug' => 'required|unique:products,slug'.$request->id,
+        'slug' => 'required|unique:products,slug,'.$request->id,
         'short_description' => 'required',
         'description' => 'required',
         'regular_price' => 'required',
@@ -225,7 +242,7 @@ public function product_update(Request $request)
         'stock_status' => 'required',
         'featured' => 'required',
         'quantity' => 'required',
-        'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        'image' => 'mimes:png,jpg,jpeg|max:2048',
         'category_id' => 'required',
         'brand_id' => 'required'
     ]);
@@ -251,11 +268,50 @@ public function product_update(Request $request)
             $filePath = $request->file('image')->store('image', 'public');
             $product->image = $filePath;
         }
-       
-       
-        
 
+        $gallery_arr = array();
+        $gallery_images = "";
+        $counter = 1;
+
+       if ($request->hasFile('images')) 
+       {
+        foreach (explode(',',$product->images) as $ofile) {
+            if (File::exists(public_path('uploads/products').'/'.$ofile)) {
+                File::delete(public_path('uploads/products').'/'.$ofile);
+            }
+        }
+        $allowedfileExtion = ['jpg','png','jpeg'];
+        $files = $request->file('images');
+        foreach($files as $file){
+            $gextension = $file->getClientOriginalExtension();
+            $gcheck = in_array($gextension,$allowedfileExtion);
+            if ($gcheck) 
+            {
+                $gfileName = $current_timestamp . "-" . $counter . "." . $gextension;
+                array_push($gallery_arr,$gfileName);
+                $counter = $counter + 1;
+            }
+        }
+        $gallery_images = implode(',' ,$gallery_arr);
+        $product->images = $gallery_images;
+       }
+       
         $product->save();
         return redirect()->route('admin.products')->with('status','Product has been updated successfully!');
    } 
+   public function product_delete($id){
+    $product = Product::find($id);
+    if (File::exists(public_path('uploads/products').'/'.$product->image)) {
+        File::delete(public_path('uploads/products').'/'.$product->image);
+    }
+    foreach (explode(',',$product->images) as $ofile) {
+        if (File::exists(public_path('uploads/products').'/'.$ofile)) {
+            File::delete(public_path('uploads/products').'/'.$ofile);
+        }
+    
+    $product->delete();
+    return redirect()->route('admin.products')->with('status','Product has been deleted successfully!');
+   }
+}
+
 }
