@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Models\Brand;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,15 @@ Route::put('/cart/increase-quantity/{rowId}',[CartController::class,'increase_ca
 Route::put('/cart/decrease-quantity/{rowId}',[CartController::class,'decrease_cart_quantity'])->name('cart.qty.decrease');
 Route::delete('/cart/remove/{rowId}',[CartController::class,'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/clear',[CartController::class,'empty_item'])->name('cart.empty');
+Route::post('/cart/apply-coupon',[CartController::class,'apply_coupon_code'])->name('cart.coupon.apply');
+Route::delete('/cart/remove-coupon',[CartController::class,'remove_coupon_code'])->name('cart.coupon.code');
+
+Route::post('/wishlist/add',[WishlistController::class,'add_to_wishlist'])->name('wishlist.add');
+Route::get('/wishlist',[WishlistController::class,'index'])->name('wishlist.index');
+Route::delete('/wishlist/item/remove/{rowId}',[WishlistController::class,'remove_item'])->name('wishlist.item.remove');
+Route::delete('/wishlist/clear',[WishlistController::class,'empty_wishlist'])->name('wishlist.items.clear');
+Route::post('/wishlist/move-to-cart/{rowId}',[WishlistController::class,'move_to_cart'])->name('wishlist.move.to.cart');
+
 Route::middleware(['auth'])->group(function() {
     Route::get('/account-dashboard',[UserController::class,'index'])->name('user.index');
     
@@ -47,6 +57,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function() {
     Route::get('/admin/brand/edit/{id}',[AdminController::class,'brand_edit'])->name('admin.brand.edit');
     Route::put('/admin/brand/update',[AdminController::class,'brand_update'])->name('admin.brand.update');
     Route::delete('/admin/brand/{id}/delete',[AdminController::class,'brand_delete'])->name('admin.brand.delete');
+    
     Route::get('/admin/categories',[AdminController::class, 'categories'])->name('admin.categories');
     Route::get('/admin/category/add',[AdminController::class,'category_add'])->name('admin.category.add');
     Route::post('/admin/category/store',[AdminController::class,'category_store'])->name('admin.category.store');
@@ -61,6 +72,11 @@ Route::middleware(['auth',AuthAdmin::class])->group(function() {
     Route::put('/admin/product/update',[AdminController::class,'product_update'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete',[AdminController::class,'product_delete'])->name('admin.product.delete');
 
-    
+    Route::get('/admin/coupons',[AdminController::class,'coupons'])->name('admin.coupons');
+    Route::get('/admin/coupon/add',[AdminController::class,'coupon_add'])->name('admin.coupon.add');
+    Route::post('/admin/coupon/store',[AdminController::class,'coupon_store'])->name('admin.coupon.store');
+    Route::get('/admin/coupon/{id}/edit',[AdminController::class,'coupon_edit'])->name('admin.coupon.edit');
+    Route::put('/admin/coupon/update',[AdminController::class,'coupon_update'])->name('admin.coupon.update');
+    Route::delete('/admin/coupon/{id}/delete',[AdminController::class,'coupon_delete'])->name('admin.coupon.delete');
 
 });
