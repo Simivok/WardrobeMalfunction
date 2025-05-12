@@ -31,9 +31,9 @@
                       
                   
                   <div class="swiper-slide product-single__image-item">
-                    <img loading="lazy" class="h-auto" src="{{asset('storage/'.$gimg)}}" width="674"
+                    <img loading="lazy" class="h-auto" src="{{asset('storage/images/'.$gimg)}}" width="674"
                       height="674" alt="" />
-                    <a data-fancybox="gallery" href="{{asset('storage/'.$gimg)}}" data-bs-toggle="tooltip"
+                    <a data-fancybox="gallery" href="{{asset('storage/images/'.$gimg)}}" data-bs-toggle="tooltip"
                       data-bs-placement="left" title="Zoom">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_zoom" />
@@ -62,7 +62,7 @@
                       src="{{asset('storage/'.$product->image)}}" width="104" height="104" alt="" /></div>
                       @foreach (explode(',',$product->images) as $gimg)
                   <div class="swiper-slide product-single__image-item"><img loading="lazy" class="h-auto"
-                      src="{{asset('storage/'.$gimg)}}" width="104" height="104" alt="" /></div>
+                      src="{{asset('storage/images/'.$gimg)}}" width="104" height="104" alt="" /></div>
                       @endforeach
                 </div>
               </div>
@@ -437,7 +437,7 @@
                   <img loading="lazy" src="{{asset('storage/'.$rproduct->image)}}" width="330" height="400"
                     alt="{{$rproduct->name}}" class="pc__img">
                     @foreach (explode(",",$rproduct->images) as $gimg )
-                  <img loading="lazy" src="{{asset('storage/'.$gimg)}}" width="330" height="400"
+                  <img loading="lazy" src="{{asset('storage/images/'.$gimg)}}" width="330" height="400"
                     alt="{{$rproduct->name}}" class="pc__img pc__img-second">
                 </a>
                     @endforeach
